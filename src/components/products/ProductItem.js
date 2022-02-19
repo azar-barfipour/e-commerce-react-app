@@ -2,6 +2,16 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import classes from "./ProductItem.module.css";
 const ProductItem = (props) => {
+  const orderHandler = (e) => {
+    e.preventDefault();
+    console.log(props.id);
+    props.onOrder((prevItemes) => {
+      return [
+        ...prevItemes,
+        { id: props.id, title: props.title, price: props.price },
+      ];
+    });
+  };
   return (
     <Fragment>
       <Link to={`/produnt-detail/${props.id}`}>
@@ -15,6 +25,7 @@ const ProductItem = (props) => {
           ></img>
         </li>
       </Link>
+      <button onClick={orderHandler}>Order Now</button>
     </Fragment>
   );
 };

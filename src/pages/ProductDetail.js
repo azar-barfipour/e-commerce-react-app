@@ -5,10 +5,11 @@ import ProductDetailItem from "../components/products/ProductDetailItem";
 const ProductDetail = () => {
   const [detailData, setDetailData] = useState([]);
   const params = useParams();
+  console.log(params.productId);
   const fetchDetailHandler = async () => {
     try {
       const res = await fetch(
-        `https://jsonblob.com/api/943634345093251072/${params.productId}`
+        `https://jsonblob.com/api/943634345093251072/?myparam1=${params.productId}`
       );
       const data = await res.json();
       setDetailData(data);

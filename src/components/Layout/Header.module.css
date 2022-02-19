@@ -1,0 +1,14 @@
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.nav__list {
+  display: flex;
+}
+.nav__link {
+  text-decoration: none;
+}
+.nav__item {
+  padding: 1rem;
+  list-style: none;
+}
