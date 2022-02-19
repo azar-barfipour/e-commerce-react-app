@@ -5,13 +5,26 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import { Route, Switch } from "react-router";
 function App() {
+  const [data, setData] = useState([]);
+  const [cartData, setCartData] = useState([]);
+
+  const filterByNameHandler = (entered) => {
+    console.log(entered);
+    if (entered) {
+      //  I should check clear state when cleaning the input
+      // Also try button instead of search bar for searching
+      const filteredData = data.filter((item) =>
+        item.title.toLowerCase().includes(entered.toLowerCase())
+      );
+      setData(filteredData);
+    }
+  };
+
   const orderCartAppHandler = (cartData) => {
     console.log(cartData);
     setCartData(cartData);
   };
 
-  const [data, setData] = useState([]);
-  const [cartData, setCartData] = useState([]);
   const fetchHandler = async () => {
     try {
       const res = await fetch("https://jsonblob.com/api/943634345093251072");
@@ -33,7 +46,11 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/">
-          <Products products={data} onOrderToApp={orderCartAppHandler} />
+          <Products
+            products={data}
+            onOrderToApp={orderCartAppHandler}
+            onFilterName={filterByNameHandler}
+          />
         </Route>
         <Route path="/produnt-detail/:productId">
           <ProductDetail />
